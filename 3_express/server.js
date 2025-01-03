@@ -1,5 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
+import myMiddleware from "./middlewares/middle.js";
+import customeMiddle from "./middlewares/cusomeMiddle.js";
+import morgan from "morgan";
 
 dotenv.config();
 
@@ -7,6 +10,13 @@ const port = process.env.PORT || 3000;
 
 const app = express();
 app.use(express.json());
+
+//custome middle ware
+
+app.use(myMiddleware);
+app.use(customeMiddle);
+app.use(morgan('tiny'));
+
 let courses = [
   { id: 1, c_name: "javascript", price: 212 },
   { id: 2, c_name: "java", price: 322 },
@@ -42,6 +52,9 @@ app.get("/courses", (req, res) => {
 //add data in courses arrays using post
 
 app.post("/courses", (req, res) => {
+  //pass as a json so we need json middleware like -> app.use(express.json())
+  //request processing cycles..
+
   const course = {
     id: courses.length + 1,
     c_name: req.body.c_name,
@@ -101,4 +114,4 @@ app.listen(port, () => {
 //       .send("course you are loking for not available right now !!");
 //   else res.send(course);
 // });
-77
+77;
