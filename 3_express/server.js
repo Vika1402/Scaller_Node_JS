@@ -6,6 +6,15 @@ dotenv.config();
 const port = process.env.PORT || 3000;
 
 const app = express();
+
+const courses = [
+  { id: 1, c_name: "javascript", price: 212 },
+  { id: 2, c_name: "java", price: 322 },
+  { id: 3, c_name: "mongoDb", price: 433 },
+  { id: 4, c_name: "express js", price: 665 },
+  { id: 5, c_name: "Recat js", price: 544 },
+];
+
 //get, put, post, delete
 app.get("/", (req, res) => {
   return res.json({ message: "First express Server running by Vika" });
@@ -18,6 +27,19 @@ app.get("/about", (req, res) => {
 });
 app.get("/services", (req, res) => {
   return res.json({ message: "Services here !" });
+});
+app.get("/courses/:name", (req, res) => {
+  // console.log(req.params);
+  let name = req.params.name;
+  let course = courses.find((course) => course.c_name === name);
+  res.send(course);
+});
+
+app.get("/courses/course_id/:id", (req, res) => {
+  // console.log(req.params);
+  let courseId = req.params.id;
+  let course = courses.find((course) => course.id === parseInt(courseId));
+  res.send(course);
 });
 
 app.listen(port, () => {
