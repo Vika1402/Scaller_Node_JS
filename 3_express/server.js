@@ -28,11 +28,16 @@ app.get("/about", (req, res) => {
 app.get("/services", (req, res) => {
   return res.json({ message: "Services here !" });
 });
-app.get("/courses/:name", (req, res) => {
+app.get("/courses/course_name/:name", (req, res) => {
   // console.log(req.params);
   let name = req.params.name;
   let course = courses.find((course) => course.c_name === name);
-  res.send(course);
+
+  if (!course)
+    res
+      .status(404)
+      .send("course you are loking for not available right now !!");
+  else res.send(course);
 });
 
 app.get("/courses/course_id/:id", (req, res) => {
@@ -40,6 +45,12 @@ app.get("/courses/course_id/:id", (req, res) => {
   let courseId = req.params.id;
   let course = courses.find((course) => course.id === parseInt(courseId));
   res.send(course);
+
+  if (!course)
+    res
+      .status(404)
+      .send("course you are loking for not available right now !!");
+  else res.send(course);
 });
 
 app.listen(port, () => {
