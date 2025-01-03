@@ -1,0 +1,16 @@
+write index.js as export function
+in single folder
+
+run commands
+npm init
+
+
+FOR ADD FILLE IN NPM(run all the command in integrated terminal)
+
+npm adduser
+login your account
+npm publish 
+
+
+THANKS YOU >>>>>>>
+
